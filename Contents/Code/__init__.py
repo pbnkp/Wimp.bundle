@@ -21,7 +21,7 @@ def Start():
     DirectoryObject.thumb = R(ICON)
     VideoItem.thumb = R(ICON)
     
-    HTTP.CacheTime = 0
+    HTTP.CacheTime = CACHE_1HOUR
 
  
 
@@ -37,7 +37,7 @@ def VideoMainMenu():
 def NewestVideos(title):
     
     oc = ObjectContainer(title1=title, view_group="InfoList")
-    data = HTML.ElementFromURL(WIMP_URL, cacheTime=CACHE_1HOUR)
+    data = HTML.ElementFromURL(WIMP_URL)
     
     for video in data.xpath('//span[@class="video_date"]'):
         #Log(video.text)
@@ -57,7 +57,7 @@ def NewestVideos(title):
 def OlderVideos(title):
     
     oc = ObjectContainer(title1=title, view_group="InfoList")
-    data = HTML.ElementFromURL(WIMP_URL, cacheTime=CACHE_1HOUR)
+    data = HTML.ElementFromURL(WIMP_URL)
     
     for video in data.xpath('//span[@class="video_date"]'):
         #Log(video.text)
