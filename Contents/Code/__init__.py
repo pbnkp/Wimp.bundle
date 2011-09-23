@@ -77,16 +77,26 @@ def OlderVideos(title):
     
     return oc
 
+@indirect
 def RandomUrl():
+    oc = ObjectContainer()
+    
     url = WIMP_URL + '/random/'
     request = urllib2.Request(url)
     opener = urllib2.build_opener(SmartRedirectHandler)
     f = opener.open(request)
     if f.status == 301 or f.status == 302:
-        #Log(f.url)
-        return f.url
+        Log(f.url)
+        #URLService.MediaObjectsForURL(f.url)
+        #return Redirect(f.url)
+        oc.add(VideoClipObject(url=f.url))
     
-    return url
+    #return URLService.MediaObjectsForURL(url)
+    #return Redirect(url)
+    else:
+        oc.add(VideoClipObject(url=url))
+    
+    return oc
 
 class SmartRedirectHandler(urllib2.HTTPRedirectHandler):     
   def http_error_301(self, req, fp, code, msg, headers):
